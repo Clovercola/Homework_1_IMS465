@@ -19,5 +19,27 @@ public class GameManager : MonoBehaviour
 
     //TODO
     //Using const data defined above "Instantiate" new pieces to fill the view with
+    public void Awake()
+    {
+        Vector3 loc = new Vector3(-6f, 4, 0);
+        Quaternion rotation = new Quaternion();
+        rotation.eulerAngles.Set(0, 0, 0);
+        for (int i = 0; i < TOTAL_ROWS; i++)
+        {
+            FillRow(loc, rotation);
+            loc.y -= 0.5f;
+        }
+    }
+
+    private void FillRow(Vector3 loc, Quaternion rotation)
+    {
+        for (int i = 0; i < PIECE_COUNT_PER_ROW; i++)
+        {
+            Object.Instantiate(piecePrefab, loc, rotation);
+            loc.x += 1f;
+        }
+        
+
+    }
 
 }

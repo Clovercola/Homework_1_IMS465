@@ -7,7 +7,7 @@ public class Ball : MonoBehaviour
 
     private bool canLaunch = true;
     private Vector3 movement = Vector3.zero;
-    private readonly float speed = 5.0f;
+    private readonly float speed = 7.0f;
 
     //TODO: Add code to move ball along with code to delete pieces upon colliding with one
     //Ball should only move once its been launched
@@ -47,7 +47,7 @@ public class Ball : MonoBehaviour
         if (canLaunch == true)
         {
             //Launch
-            movement = new Vector3(Random.Range(-5f, 5f), Random.Range(1f, 5f), 0).normalized;
+            movement = new Vector3(Random.Range(-1f, 1f), Random.Range(1f, 5f), 0).normalized;
             canLaunch = false;
             return true;
         }
