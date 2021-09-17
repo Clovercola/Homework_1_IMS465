@@ -14,12 +14,12 @@ public class Paddle : MonoBehaviour
         // --- MOVEMENT ---
         if (Input.GetKey(KeyCode.A))
         {
-            transform.Translate(Vector3.left * Time.deltaTime * speed, Space.World);
+            transform.Translate(speed * Time.deltaTime * Vector3.left, Space.World);
         }
 
         if (Input.GetKey(KeyCode.D))
         {
-            transform.Translate(Vector3.right * Time.deltaTime * speed, Space.World);
+            transform.Translate(speed * Time.deltaTime * Vector3.right, Space.World);
         }
         var xPos = Mathf.Clamp(transform.position.x, -7.6f, 7.6f);
         transform.position = new Vector3(xPos, transform.position.y, transform.position.z);

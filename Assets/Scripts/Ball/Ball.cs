@@ -14,6 +14,7 @@ public class Ball : MonoBehaviour
 
     //Ball Launches and Moves - [DONE]
     //Ball collides with other gameobjects - [DONE]
+    //Ball deletes pieces it collides with - [DONE]
 
     void Update()
     {
@@ -25,22 +26,32 @@ public class Ball : MonoBehaviour
         }
 
         var xPos = Mathf.Clamp(transform.position.x, -8.65f, 8.65f);
-        if (transform.position.x < -8.65f || transform.position.x > 8.65f)
+        var yPos = Mathf.Clamp(transform.position.y, -6f, 4.9f);
+        if (transform.position.x < -8.65f || transform.position.x > 8.65f) 
         {
             movement.x *= -1;
         }
-        transform.position = new Vector3(xPos, transform.position.y, transform.position.z);
+        if (transform.position.y >= 4.7f)
+        {
+            movement.y *= -1;
+        }
+        transform.position = new Vector3(xPos, yPos, transform.position.z);
     }
 
     void FixedUpdate()
     {
-        var newDirection = movement * Time.deltaTime * speed;
+        var newDirection = speed * Time.deltaTime * movement;
         rigidBody.MovePosition(transform.position + newDirection);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         movement = Vector2.Reflect(movement, collision.contacts[0].normal);
+        //Debug.Log(collision.collider);
+        if (collision.collider.CompareTag("Piece"))
+        {
+            Object.Destroy(collision.collider.gameObject);
+        }
     }
 
     public bool LaunchBall() { 

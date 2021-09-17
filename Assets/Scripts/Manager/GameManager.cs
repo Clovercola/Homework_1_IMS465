@@ -38,8 +38,6 @@ public class GameManager : MonoBehaviour
             Object.Instantiate(piecePrefab, loc, rotation);
             loc.x += 1f;
         }
-        
-
     }
 
 }
